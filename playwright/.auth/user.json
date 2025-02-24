@@ -1,0 +1,35 @@
+{
+  "cookies": [
+    {
+      "name": "TS01e8201b",
+      "value": "0137e3526f80316bb94d1739df3b05407cff770eb0b619f826a5f4af7bc161aa2dccee7486517754bdcd018d2a39d83808e0a6b871",
+      "domain": "opendata.aemet.es",
+      "path": "/centrodedescargas/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "JSESSIONID",
+      "value": "678F40EB6C8C86029326B4EF5675ADDD",
+      "domain": "opendata.aemet.es",
+      "path": "/centrodedescargas/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "TS017a6cb0",
+      "value": "0137e3526f80316bb94d1739df3b05407cff770eb0b619f826a5f4af7bc161aa2dccee7486517754bdcd018d2a39d83808e0a6b871",
+      "domain": ".opendata.aemet.es",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}

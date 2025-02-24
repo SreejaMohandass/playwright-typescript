@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "lib": ["es5", "dom"],
+        "types": ["node"],
+        "skipLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "~/*": ["./*"]
+        },
+        "typeRoots": ["./node_modules/@types"]
+    },
+    "include": ["**/*.ts"]
+}

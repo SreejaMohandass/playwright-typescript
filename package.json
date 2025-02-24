@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "test:ui": "npx playwright test --ui",
+    "test:headed": "npx playwright test --headed",
+    "test": "npx playwright test"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "imap": "^0.8.19",
+    "mailparser": "^3.7.2",
+    "playwright": "^1.50.1",
+    "simple-parser": "^0.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.1",
+    "@types/node": "^22.13.5"
+  }
+}
