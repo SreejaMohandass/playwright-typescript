@@ -37,6 +37,8 @@ Update your `.env` file with the necessary credentials:
 ```env
 EMAIL=test@example.com
 PASSWORD=yourpassword
+HOST=host
+PORT=port
 ```
 
 ## 🛠 Debugging
@@ -49,5 +51,3 @@ PASSWORD=yourpassword
   DEBUG=pw:api npm run test:headed
   ```
 
-## 📄 License
-This project is licensed under [MIT License](LICENSE).
