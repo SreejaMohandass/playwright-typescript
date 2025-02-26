@@ -1,18 +1,12 @@
 import test, {expect} from "@playwright/test";
 import { HomePage } from '~/tests/pages/home-page';
 import { LoginPage } from "~/tests/pages/login-page";
-import { fetchEmailBodyBySubject } from "~/utils/utils";
+import { fetchEmailBodyBySubject } from "~/utils";
 import { GeneralAccessPage } from '~/tests/pages/geneeral-access-page';
+import { EMAIL_SUBJECT_FOR_API_KEY, IMAP_CONFIG } from '~/utils';
 
 test.describe("Login Page", () => {
-    const imapConfig = {
-        user: process.env.EMAIL,
-        password: process.env.PASSWORD,
-        host: process.env.HOST,
-        port: process.env.PORT,
-        tls: true,
-        tlsOptions: { rejectUnauthorized: false } 
-      };
+    
       
     test("Valid email : Parse the email and retrieve the API Key", async ({page}) => {
         const homePage = new HomePage(page); 
@@ -28,8 +22,7 @@ test.describe("Login Page", () => {
 
         await page.waitForTimeout(60000);
 
-        const subject = 'Alta en el servicio AEMET OpenData';
-        const emailBody = await fetchEmailBodyBySubject(imapConfig, subject);
+        const emailBody = await fetchEmailBodyBySubject(IMAP_CONFIG, EMAIL_SUBJECT_FOR_API_KEY);
       
         console.log('Email body:', emailBody);
         await page.goto("/");

@@ -1,10 +1,9 @@
-const Imap = require('imap'); // Import IMAP correctly
-const { simpleParser } = require('mailparser'); // Import mailparser for parsing email bodies
+const Imap = require('imap'); 
+const { simpleParser } = require('mailparser'); 
 
-// Function to fetch email body
 export const fetchEmailBody = (imapConfig: any): Promise<string> => {
   return new Promise((resolve, reject) => {
-    const imap = new Imap(imapConfig); // ✅ Correct instantiation
+    const imap = new Imap(imapConfig); 
 
     imap.once('ready', function () {
       imap.openBox('INBOX', true, function (err, box) {
@@ -13,7 +12,7 @@ export const fetchEmailBody = (imapConfig: any): Promise<string> => {
           return;
         }
 
-        const f = imap.seq.fetch(box.messages.total + ':*', { bodies: '' }); // Fetch the latest email
+        const f = imap.seq.fetch(box.messages.total + ':*', { bodies: '' });
 
         f.on('message', function (msg, seqno) {
           msg.on('body', function (stream) {
@@ -21,14 +20,14 @@ export const fetchEmailBody = (imapConfig: any): Promise<string> => {
               if (err) {
                 reject(err);
               } else {
-                resolve(parsed.text || ''); // Resolve the email body
+                resolve(parsed.text || ''); 
               }
             });
           });
         });
 
         f.once('end', function () {
-          imap.end(); // Close IMAP connection
+          imap.end(); 
         });
       });
     });
@@ -41,11 +40,10 @@ export const fetchEmailBody = (imapConfig: any): Promise<string> => {
       console.log('IMAP connection closed');
     });
 
-    imap.connect(); // Establish the IMAP connection
+    imap.connect(); 
   });
 };
 
-// Function to fetch email body by subject and extract the value of the textarea
 export const fetchEmailBodyBySubject = (imapConfig: any, subject: string): Promise<string> => {
   return new Promise((resolve, reject) => {
     const imap = new Imap(imapConfig);
@@ -57,7 +55,6 @@ export const fetchEmailBodyBySubject = (imapConfig: any, subject: string): Promi
           return;
         }
 
-        // Use a more flexible search (contains subject part)
         imap.search([['TEXT', subject]], function (err, results) {
           if (err) {
             reject(err);
@@ -69,8 +66,7 @@ export const fetchEmailBodyBySubject = (imapConfig: any, subject: string): Promi
             return;
           }
 
-          // Fetch the email body for the first matching email
-          const fetchOptions = { bodies: '', markSeen: false }; // Don't mark as read
+          const fetchOptions = { bodies: '', markSeen: false }; 
           const f = imap.fetch(results[0], fetchOptions);
 
           f.on('message', function (msg) {
@@ -79,15 +75,13 @@ export const fetchEmailBodyBySubject = (imapConfig: any, subject: string): Promi
                 if (err) {
                   reject(err);
                 } else {
-                  // The email body might be in HTML, so we'll check for that first
                   const emailBody = parsed.html || parsed.text || '';
 
-                  // Now extract the API key from the <textarea> content using regex
-                  const apiKeyMatch = emailBody.match(/<textarea[^>]*>(.*?)<\/textarea>/s); // Match content inside <textarea>
+                  const apiKeyMatch = emailBody.match(/<textarea[^>]*>(.*?)<\/textarea>/s); 
 
                   if (apiKeyMatch) {
-                    const apiKey = apiKeyMatch[1].trim(); // Extract the API key from the match
-                    resolve(apiKey); // Return the API key
+                    const apiKey = apiKeyMatch[1].trim();
+                    resolve(apiKey); 
                   } else {
                     reject(new Error('API Key not found in email body.'));
                   }
@@ -97,7 +91,7 @@ export const fetchEmailBodyBySubject = (imapConfig: any, subject: string): Promi
           });
 
           f.once('end', function () {
-            imap.end(); // Close IMAP connection
+            imap.end();
           });
         });
       });
@@ -111,6 +105,6 @@ export const fetchEmailBodyBySubject = (imapConfig: any, subject: string): Promi
       console.log('IMAP connection closed');
     });
 
-    imap.connect(); // Establish the IMAP connection
+    imap.connect(); 
   });
 };

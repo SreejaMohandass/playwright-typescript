@@ -6,7 +6,6 @@ export class LoginPage {
         this.page = Page;
     }
 
-    
     getEmailInputButton(): Locator {
         return this.page.locator('#email');
     }
